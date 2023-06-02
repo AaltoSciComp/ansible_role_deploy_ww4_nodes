@@ -1,5 +1,8 @@
-{%for item in groups[ww4_nodes_group_name] %}
+{%- for item in groups[ww4_nodes_group_name] %}
 {{item}}{{ww4_node_suffix}}:
+{% if hostvars[item|quote].ww4_node_container is defined %}
+  container name: {{hostvars[item|quote].ww4_node_container}}
+{%endif%}
   profiles:
   - {{hostvars[item|quote].ww4_node_profile}}
   network devices:

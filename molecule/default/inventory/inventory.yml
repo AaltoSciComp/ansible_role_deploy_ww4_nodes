@@ -9,3 +9,4 @@ ww4_nodes:
     host4:
       ww4_node_hwaddr: 04:04:04:04:04:04
       ww4_node_ipaddr: 198.51.100.4
+      ww4_node_container: specific-container
