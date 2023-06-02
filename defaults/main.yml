@@ -2,3 +2,4 @@
 # defaults file for ansible_role_deploy_ww4_nodes
 
 ww4_nodes_group_name: ww4_nodes
+ww4_node_suffix: ".clust"

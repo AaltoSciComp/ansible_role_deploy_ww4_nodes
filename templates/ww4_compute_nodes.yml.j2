@@ -1,5 +1,5 @@
 {%for item in groups[ww4_nodes_group_name] %}
-{{item}}:
+{{item}}{{ww4_node_suffix}}:
   profiles:
   - {{hostvars[item|quote].ww4_node_profile}}
   network devices:
