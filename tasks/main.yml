@@ -1,48 +1,37 @@
 ---
 # tasks file for ansible_role_deploy_ww4_nodes
 
-- name: Create temporary folder for the .yml
+- name: Create temporary file for the .yml
   ansible.builtin.tempfile:
-    state: directory
-    suffix: container_storage
-  register: tmp_folder_for_yaml
+    state: file
+    suffix: ".yml"
+  register: tmp_for_yaml
 
-#- name: the nodes
-#  ansible.builtin.debug:
-#    msg: "node: {{ww4_node_hostname}} {{ww4_node_profile}} {{ww4_node_hwaddr}} {{ww4_node_ipaddr}}"
-#  vars:
-#    ww4_node_hostname: "{{item}}"
-#    ww4_node_profile:  "{{hostvars[item|quote].ww4_node_profile    }}"
-#    ww4_node_hwaddr:   "{{hostvars[item|quote].ww4_node_hwaddr     }}"
-#    ww4_node_ipaddr:   "{{hostvars[item|quote].ww4_node_ipaddr     }}"
-#  loop: "{{groups['ww4_nodes']}}"
 
 
 - name: Write the compute node yaml file for importing
   ansible.builtin.template:
     src: templates/ww4_compute_nodes.yml.j2
-    dest: "{{tmp_folder_for_yaml.path}}/ww4_compute_nodes.yml"
-#  loop: "{{groups['ww4_nodes']}}"
-#  vars:
-#    ww4_node_hostname: "hostname"
-#    ww4_node_profile:  "default"
-#    ww4_node_hwaddr: "00:AA:00:00:99:99"
-#    ww4_node_ipaddr: "198.51.100.1"
+    dest: "{{tmp_for_yaml.path}}"
 
 
-- name: yaml file contents
+- name: Save yaml file contents in a variable for debug
   ansible.builtin.command:
-    cmd: "cat ww4_compute_nodes.yml"
-    chdir: "{{tmp_folder_for_yaml.path}}"
+    cmd: "cat {{tmp_for_yaml.path}}"
   register: command_output
-- name: Print to console
+- name: Print yaml to console
   ansible.builtin.debug:
     msg: "{{command_output.stdout_lines}}"
+    verbosity: 1
 
+- name: Deploy the nodes in warewulf
+  ansible.builtin.shell:
+    cmd: "echo y |wwctl node import {{tmp_for_yaml.path}}"
+  tags: notest
 
-- name: Remove the temporary folder
+- name: Remove the temporary file
   ansible.builtin.file:
-    path: "{{tmp_folder_for_yaml.path}}"
+    path: "{{tmp_for_yaml.path}}"
     state: absent
-  when: tmp_folder_for_yaml.path is defined
+  when: tmp_for_yaml.path is defined
   tags: notest

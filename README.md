@@ -11,7 +11,7 @@ Role Variables
 --------------
 
 - `ww4_nodes_group_name`: *ww4_nodes*
-  - The host group from inventory to deploy
+  - The host group within inventory to deploy
 
 Dependencies
 ------------
