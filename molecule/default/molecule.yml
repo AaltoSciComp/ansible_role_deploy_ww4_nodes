@@ -12,5 +12,8 @@ provisioner:
   inventory:
     links:
       hosts: inventory/
+#  group_vars:
+#    ww4_nodes:
+#      ww4_node_profile: 'very-default'
 verifier:
   name: ansible
