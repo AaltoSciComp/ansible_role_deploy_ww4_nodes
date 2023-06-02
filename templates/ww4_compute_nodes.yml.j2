@@ -1,0 +1,10 @@
+{%for item in groups['ww4_nodes'] %}
+{{item}}:
+  profiles:
+  - {{hostvars[item|quote].ww4_node_profile}}
+  network devices:
+    default:
+      hwaddr: {{hostvars[item|quote].ww4_node_hwaddr}}
+      ipaddr: {{hostvars[item|quote].ww4_node_ipaddr}}
+
+{%endfor%}

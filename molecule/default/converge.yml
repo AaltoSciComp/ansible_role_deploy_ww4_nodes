@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: instance
+#  hosts: all
+  tasks:
+    # replace these tasks with whatever you find suitable to test
+    - name: Copy something to test use of synchronize module
+      ansible.builtin.copy:
+        src: /etc/hosts
+        dest: /tmp/hosts-from-controller
+    - name: "Include aaltoscicomp.ansible_role_deploy_ww4_nodes"
+      ansible.builtin.include_role:
+        name: "aaltoscicomp.ansible_role_deploy_ww4_nodes"
