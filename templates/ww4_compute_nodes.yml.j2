@@ -1,4 +1,4 @@
-{%for item in groups['ww4_nodes'] %}
+{%for item in groups[ww4_nodes_group_name] %}
 {{item}}:
   profiles:
   - {{hostvars[item|quote].ww4_node_profile}}
