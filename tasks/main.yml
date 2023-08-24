@@ -7,9 +7,15 @@
     suffix: ".yml"
   register: tmp_for_yaml
 
+- name: Print the node profiles delete commands to console
+  ansible.builtin.debug:
+    msg: "echo y |wwctl profile delete  {{item['Id']}}"
+    verbosity: 1
+  loop: "{{ ww4_profiles }}"
+
 - name: Remove existing versions of the node profiles
   ansible.builtin.shell:
-    cmd: "echo y |echo wwctl profile delete  {{item['Id']}}"
+    cmd: "echo y |wwctl profile delete  {{item['Id']}}"
   loop: "{{ ww4_profiles }}"
   tags: notest
 
