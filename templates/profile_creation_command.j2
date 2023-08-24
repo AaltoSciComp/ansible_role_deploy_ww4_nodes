@@ -1,5 +1,5 @@
 wwctl profile add {{item['Id']}}{%- if item['Comment']    is defined %} --comment "{{item['Comment']}}"{%- endif %}
-{%- if item['KernelArgs'] is defined %} -K "{{item['KernelArgs']}}"{%- endif %}
+{%- if item['KernelArgs'] is defined %} --kernelargs "{{item['KernelArgs']}}"{%- endif %}
 {%- if item['Network']    is defined %}
 {%- if item['Network']['NETMASK'] is defined %} --netmask "{{item['Network']['NETMASK']}}"{%- endif %}
 {%- if item['Network']['GATEWAY'] is defined %} --gateway "{{item['Network']['GATEWAY']}}"{%- endif %}
