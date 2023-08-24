@@ -3,3 +3,17 @@
 
 ww4_nodes_group_name: ww4_nodes
 ww4_node_suffix: ".clust"
+ww4_profiles:
+ - Id: 'example-profile-1'
+   Comment: 'some comment'
+   KernelArgs: 'example kernel=0 args'
+   Network:
+      netname: netName
+      NETMASK: 255.255.0.0
+      GATEWAY: 10.1.1.254
+ - Id: 'another-example'
+   Comment: 'some comment'
+   Network:
+      netname: default
+      NETMASK: 255.255.0.0
+      GATEWAY: 10.1.1.254

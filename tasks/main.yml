@@ -7,13 +7,29 @@
     suffix: ".yml"
   register: tmp_for_yaml
 
+- name: Remove existing versions of the node profiles
+  ansible.builtin.shell:
+    cmd: "echo y |echo wwctl profile delete  {{item['Id']}}"
+  loop: "{{ ww4_profiles }}"
+  tags: notest
+
+- name: Print the node profiles creating commands to console
+  ansible.builtin.debug:
+    msg: "echo y | {{ lookup('ansible.builtin.template','profile_creation_command.j2') }}"
+    verbosity: 1
+  loop: "{{ ww4_profiles }}"
+
+- name: Create the node profiles
+  ansible.builtin.shell:
+    cmd: "echo y | {{ lookup('ansible.builtin.template','profile_creation_command.j2') }}"
+  loop: "{{ ww4_profiles }}"
+  tags: notest
 
 
 - name: Write the compute node yaml file for importing
   ansible.builtin.template:
     src: templates/ww4_compute_nodes.yml.j2
     dest: "{{tmp_for_yaml.path}}"
-
 
 - name: Save yaml file contents in a variable for debug
   ansible.builtin.command:
