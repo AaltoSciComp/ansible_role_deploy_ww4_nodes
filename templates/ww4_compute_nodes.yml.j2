@@ -4,7 +4,9 @@
   container name: {{hostvars[item|quote].ww4_node_container}}
 {%endif%}
   profiles:
-  - {{hostvars[item|quote].ww4_node_profile}}
+{% for profile_item in hostvars[item|quote].ww4_node_profile.split(',') %}
+  - {{profile_item}}
+{%endfor%}
   network devices:
     default:
       hwaddr: {{hostvars[item|quote].ww4_node_hwaddr}}
