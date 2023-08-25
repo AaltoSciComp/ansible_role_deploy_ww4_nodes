@@ -1,11 +1,6 @@
 ---
 # tasks file for ansible_role_deploy_ww4_nodes
 
-- name: Create temporary file for the .yml
-  ansible.builtin.tempfile:
-    state: file
-    suffix: ".yml"
-  register: tmp_for_yaml
 
 - name: Print the node profiles delete commands to console
   ansible.builtin.debug:
@@ -32,6 +27,11 @@
   loop: "{{ ww4_profiles }}"
   tags: notest
 
+- name: Create temporary file for the .yml
+  ansible.builtin.tempfile:
+    state: file
+    suffix: ".yml"
+  register: tmp_for_yaml
 
 - name: Write the compute node yaml file for importing
   ansible.builtin.template:
