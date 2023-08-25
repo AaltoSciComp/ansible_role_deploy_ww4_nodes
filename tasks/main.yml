@@ -18,6 +18,7 @@
     cmd: "echo y |wwctl profile delete  {{item['Id']}}"
   loop: "{{ ww4_profiles }}"
   tags: notest
+  ignore_errors: true  #It is ok if the profile doesn't exist yet.
 
 - name: Print the node profiles creating commands to console
   ansible.builtin.debug:
