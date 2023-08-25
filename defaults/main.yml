@@ -17,3 +17,17 @@ ww4_profiles:
       netname: default
       NETMASK: 255.255.0.0
       GATEWAY: 10.1.1.254
+   RuntimeOverlay: generic,compute
+
+ww4_overlays:
+ - name: compute
+   dirs:
+   - name: /etc
+   files:
+   - name: /etc/hosts.ww
+     ansible_src_file: compute_etc_hosts.ww
+ - name: overlay
+   dirs:
+   - name: /etc
+   files:
+   - name: /etc/hosts.ww

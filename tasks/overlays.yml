@@ -1,0 +1,37 @@
+---
+
+- name: print overlay_item
+  debug:
+    msg: "{{overlay_item}}"
+    verbosity: 1
+
+- name: print directories
+  debug:
+    msg: "{{item}}"
+    verbosity: 2
+  loop: "{{overlay_item['dirs']}}"
+
+- name: delete the overlay
+  ansible.builtin.shell:
+    cmd: "wwctl overlay delete --force {{ overlay_item['name'] }}"
+  tags: notest
+  ignore_errors: true  #It is ok if the overlay doesn't exist yet.
+
+- name: create the overlay
+  ansible.builtin.shell:
+    cmd: "wwctl overlay create {{ overlay_item['name'] }}"
+  tags: notest
+
+- name: Create directories
+  ansible.builtin.shell:
+    cmd: "wwctl overlay mkdir {{ overlay_item['name'] }}  {{ item['name'] }}"
+  loop: "{{overlay_item['dirs']}}"
+  tags: notest
+
+
+- name: Add files to overlay
+  include_tasks: overlay_file.yml
+  loop: "{{overlay_item['files']}}"
+  loop_control:
+    loop_var: file_item
+

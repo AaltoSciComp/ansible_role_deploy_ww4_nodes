@@ -1,0 +1,33 @@
+---
+
+- name: Create temporary file for the .yml
+  ansible.builtin.tempfile:
+    state: file
+    suffix: ".yml"
+  register: tmp_for_yaml
+
+- name: Write the compute node yaml file for importing
+  ansible.builtin.template:
+    src: templates/ww4_compute_nodes.yml.j2
+    dest: "{{tmp_for_yaml.path}}"
+
+- name: Save yaml file contents in a variable for debug
+  ansible.builtin.command:
+    cmd: "cat {{tmp_for_yaml.path}}"
+  register: command_output
+- name: Print yaml to console
+  ansible.builtin.debug:
+    msg: "{{command_output.stdout_lines}}"
+    verbosity: 1
+
+- name: Deploy the nodes in warewulf
+  ansible.builtin.shell:
+    cmd: "echo y |wwctl node import {{tmp_for_yaml.path}}"
+  tags: notest
+
+- name: Remove the temporary file
+  ansible.builtin.file:
+    path: "{{tmp_for_yaml.path}}"
+    state: absent
+  when: tmp_for_yaml.path is defined
+  tags: notest

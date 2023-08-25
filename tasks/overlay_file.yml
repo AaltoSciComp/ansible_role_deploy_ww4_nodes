@@ -1,0 +1,35 @@
+---
+
+- name: print files
+  debug:
+    msg: "{{file_item}}"
+    verbosity: 2
+
+- name: Add a file to overlay from the ansible role
+  block:
+
+  - name: Create temporary file
+    ansible.builtin.tempfile:
+      state: file
+      suffix: ansible
+    register: tmpFolderOverlayFile
+
+  - name: Copy file to ww4 host
+    ansible.builtin.copy:
+      src: "{{ file_item['ansible_src_file'] }}"
+      dest: "{{ tmpFolderOverlayFile.path }}"
+
+  - name: Add the file to ww4
+    ansible.builtin.shell:
+      cmd: "wwctl overlay import {{ overlay_item['name'] }} {{ tmpFolderOverlayFile.path }} {{ file_item['name'] }}"
+    tags: notest
+
+  - name: Remove temporary file
+    ansible.builtin.file:
+      path: "{{ tmpFolderOverlayFile.path }}"
+      state: absent
+    when: tmpFolderOverlayFile.path is defined
+
+
+
+  when: file_item['ansible_src_file'] is defined
