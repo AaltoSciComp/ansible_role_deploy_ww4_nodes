@@ -5,4 +5,8 @@ wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is def
 {%- if profile_item['Network']['NETMASK'] is defined %} --netmask "{{profile_item['Network']['NETMASK']}}"{%- endif %}
 {%- if profile_item['Network']['GATEWAY'] is defined %} --gateway "{{profile_item['Network']['GATEWAY']}}"{%- endif %}
 {%- if profile_item['Network']['netname'] is defined %} --netname "{{profile_item['Network']['netname']}}"{%- endif %}
+{%- if profile_item['Network']['type'] is defined %} --type "{{profile_item['Network']['type']}}"{%- endif %}
+{%- if profile_item['Network']['primary'] is defined %} --primary "{{profile_item['Network']['primary']}}"{%- endif %}
+{%- if profile_item['Network']['onboot'] is defined %} --onboot "{{profile_item['Network']['onboot']}}"{%- endif %}
+{%- if profile_item['Network']['netdev'] is defined %} --netdev "{{profile_item['Network']['netdev']}}"{%- endif %}
 {%- endif %}

@@ -8,9 +8,10 @@ ww4_profiles:
    Comment: 'some comment'
    KernelArgs: 'example kernel=0 args'
    Network:
-      netname: netName
+      netname: infiniband
       NETMASK: 255.255.0.0
-      GATEWAY: 10.1.1.254
+      netdev: ib0
+      type: infiniband
  - Id: 'another-example'
    Comment: 'some comment'
    Network:
