@@ -13,7 +13,7 @@
       ipaddr: {{hostvars[item|quote].ww4_node_ipaddr}}
 {% if hostvars[item|quote].ib_ip_addr is defined %}
     ib:
-      ipaddr: 10.11.101.10
+      ipaddr: {{hostvars[item|quote].ib_ip_addr}}
 {%endif%}
 
 {%endfor%}
