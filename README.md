@@ -32,11 +32,11 @@ ww4_nodes:
     host3:
       ww4_node_profile: default
       ww4_node_hwaddr: 03:03:03:03:03:03
-      ww4_node_ipaddr: 198.51.100.3
+      int_ip_addr: 198.51.100.3
     host4:
       ww4_node_profile: default
       ww4_node_hwaddr: 04:04:04:04:04:04
-      ww4_node_ipaddr: 198.51.100.4
+      int_ip_addr: 198.51.100.4
 ```
 
 Example node profiles variable:

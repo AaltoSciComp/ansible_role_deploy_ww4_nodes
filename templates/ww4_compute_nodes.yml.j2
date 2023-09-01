@@ -10,7 +10,7 @@
   network devices:
     default:
       hwaddr: {{hostvars[item|quote].ww4_node_hwaddr}}
-      ipaddr: {{hostvars[item|quote].ww4_node_ipaddr}}
+      ipaddr: {{hostvars[item|quote].int_ip_addr}}
 {% if hostvars[item|quote].ib_ip_addr is defined %}
     ib:
       ipaddr: {{hostvars[item|quote].ib_ip_addr}}
