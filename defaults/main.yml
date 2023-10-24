@@ -28,7 +28,7 @@ ww4_overlays:
    files:
    - name: /etc/hosts.ww
      ansible_src_file: compute_etc_hosts.ww
-   - name: /etc/hosts.ww
+   - name: /etc/ssh/ssh_known_hosts.ww
      ansible_src_file: ssh_known_hosts.ww
  - name: overlay
    dirs:
