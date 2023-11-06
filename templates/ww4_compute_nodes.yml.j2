@@ -1,7 +1,13 @@
 {%- for item in groups[ww4_nodes_group_name] %}
-{{item}}{{ww4_node_suffix}}:
+{{item}}{{hostvars[item].ww4_node_suffix}}:
 {% if hostvars[item|quote].ww4_node_container is defined %}
   container name: {{hostvars[item|quote].ww4_node_container}}
+{%endif%}
+{% if hostvars[item|quote].ww4_wwinit is defined %}
+  system overlay:
+{% for wwinit_item in hostvars[item|quote].ww4_wwinit.split(',') %}
+  - {{ wwinit_item }}
+{%endfor%}
 {%endif%}
   profiles:
 {% for profile_item in hostvars[item|quote].ww4_node_profile.split(',') %}
@@ -14,6 +20,10 @@
 {% if hostvars[item|quote].ib_ip_addr is defined %}
     ib:
       ipaddr: {{hostvars[item|quote].ib_ip_addr}}
+{%endif%}
+{% if hostvars[item|quote].ext_ip_addr is defined %}
+    {{hostvars[item|quote].ext_netdev}}:
+      ipaddr: {{hostvars[item|quote].ext_ip_addr}}
 {%endif%}
 
 {%endfor%}
