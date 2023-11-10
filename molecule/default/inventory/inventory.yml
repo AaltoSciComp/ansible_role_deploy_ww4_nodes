@@ -6,7 +6,9 @@ ww4_nodes:
       ww4_node_profile: default
       ww4_node_hwaddr: 03:03:03:03:03:03
       int_ip_addr: 198.51.100.3
+      ww4_node_suffix: bar
     host4:
       ww4_node_hwaddr: 04:04:04:04:04:04
       int_ip_addr: 198.51.100.4
       ww4_node_container: specific-container
+      ww4_node_suffix: bar

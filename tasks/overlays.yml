@@ -31,7 +31,17 @@
 
 - name: Add files to overlay
   include_tasks: overlay_file.yml
-  loop: "{{overlay_item['files']}}"
+  loop: "{{overlay_item['files'] | default([]) }}"
   loop_control:
     loop_var: file_item
+#  when: overlay_item['files'] is defined and overlay_item['files'] | length > 0
+
+#- name: Add templated files
+#  block:
+- name: Add templated files to overlay
+  ansible.builtin.include_tasks: overlay_template.yml
+  loop: "{{overlay_item['files'] | default([]) }}"
+  loop_control:
+    loop_var: file_item
+#  when: overlay_item['templates'] is defined and overlay_item['templates'] | length > 0
 

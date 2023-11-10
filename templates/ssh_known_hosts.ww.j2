@@ -1,0 +1,12 @@
+{{ '{{- range $node := $.AllNodes}}' }}
+{% for item in ww4_sshkeys %}
+{{ '{{$node.Id.Get}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
+{% endfor %}
+{{ '{{- range $devname, $netdev := $node.NetDevs}}' }}
+{{ '{{- if $netdev.Ipaddr.Defined}}' }}
+{% for item in ww4_sshkeys %}
+{{ '{{$netdev.Ipaddr.Get}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
+{% endfor %}
+{{ '{{- end}}' }}
+{{ '{{- end}}' }}
+{{ '{{- end}}' }}

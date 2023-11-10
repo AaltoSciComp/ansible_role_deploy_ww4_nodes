@@ -5,28 +5,28 @@
     msg: "{{file_item}}"
     verbosity: 2
 
-- name: Add a file to overlay from the ansible role
+- name: Add a templated file to overlay from the ansible role
   block:
 
   - name: Create temporary file
     ansible.builtin.tempfile:
       state: file
-      suffix: overlayFile
+      suffix: overlayTemplate
     register: tmpFolderOverlayFile
 
-  - name: Copy file to ww4 host
-    ansible.builtin.copy:
-      src: "{{ file_item['ansible_src_file'] }}"
+  - name: Template the file to ww4 host
+    ansible.builtin.template:
+      src: "{{ file_item['ansible_src_template'] }}"
       dest: "{{ tmpFolderOverlayFile.path }}"
 
+  - name: Read Templated File Contents
+    ansible.builtin.slurp:
+      src: "{{ tmpFolderOverlayFile.path }}"
+    register: file_content
 
-
-
-
-
-  - name: Print the original file
+  - name: Print the templated file
     ansible.builtin.debug:
-      msg: "File Contents: {{ lookup('file', file_item['ansible_src_file'] ) }}"
+      var: file_content.content | b64decode
       verbosity: 1
 
   - name: Add the file to ww4
@@ -42,4 +42,4 @@
 
 
 
-  when: file_item['ansible_src_file'] is defined
+  when: file_item['ansible_src_template'] is defined

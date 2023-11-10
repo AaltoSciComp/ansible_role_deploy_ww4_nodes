@@ -1,5 +1,5 @@
 [ww4_nodes]
-host1 ww4_node_profile=default ww4_node_hwaddr=01:01:01:01:01:01 int_ip_addr=198.51.100.1
-host2 ww4_node_profile=default,specific ww4_node_hwaddr=02:02:02:02:02:02 int_ip_addr=198.51.100.2 ib_ip_addr=10.11.13.14
+host1 ww4_node_profile=default ww4_node_hwaddr=01:01:01:01:01:01 int_ip_addr=198.51.100.1 ww4_node_suffix=foo
+host2 ww4_node_profile=default,specific ww4_node_hwaddr=02:02:02:02:02:02 int_ip_addr=198.51.100.2 ib_ip_addr=10.11.13.14 ww4_node_suffix=foo
 [ww4_nodes:vars]
 ww4_node_profile=value-from-group-vars(ini) # overwritten by inventory.yml
