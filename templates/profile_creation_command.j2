@@ -2,12 +2,21 @@ wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is def
 {%- if profile_item['KernelArgs']         is defined %} --kernelargs "{{profile_item['KernelArgs']}}"{%- endif %}
 {%- if profile_item['RuntimeOverlay']     is defined %} --runtime "{{profile_item['RuntimeOverlay']}}"{%- endif %}
 {%- if profile_item['Container']          is defined %} --container "{{profile_item['Container']}}"{%- endif %}
-{%- if profile_item['Network']            is defined %}
-{%-   if profile_item['Network']['NETMASK'] is defined %} --netmask "{{profile_item['Network']['NETMASK']}}"{%- endif %}
+{%- if profile_item['Network']            is defined %} --netmask "{{profile_item['Network']['NETMASK']}}"
 {%-   if profile_item['Network']['GATEWAY'] is defined %} --gateway "{{profile_item['Network']['GATEWAY']}}"{%- endif %}
 {%-   if profile_item['Network']['netname'] is defined %} --netname "{{profile_item['Network']['netname']}}"{%- endif %}
 {%-   if profile_item['Network']['type']    is defined %} --type "{{profile_item['Network']['type']}}"{%- endif %}
 {%-   if profile_item['Network']['primary'] is defined %} --primary "{{profile_item['Network']['primary']}}"{%- endif %}
 {%-   if profile_item['Network']['onboot']  is defined %} --onboot "{{profile_item['Network']['onboot']}}"{%- endif %}
 {%-   if profile_item['Network']['netdev']  is defined %} --netdev "{{profile_item['Network']['netdev']}}"{%- endif %}
+{%- endif %}
+{%- if profile_item['disk'] is defined %}
+{%- if True                                    %} --diskname "{{ profile_item['disk']['dev'] }}"{%- endif %}
+{%- if True                                    %} --fsformat "{{ profile_item['disk']['format'] }}"{%- endif %}
+{%- if True                                    %} --fspath "{{ profile_item['disk']['path'] }}"{%- endif %}
+{%- if True                                    %} --partname "{{ profile_item['Id'] }}"{%- endif %}
+{%- if True                                    %} --fsname "{{ profile_item['Id'] }}"{%- endif %}
+{%- if profile_item['disk']['size'] is defined %} --partsize="{{profile_item['disk']['size']}}"{%- endif %}
+{%- if profile_item['disk']['num'] is defined  %} --partnumber "{{ profile_item['disk']['num'] }}"{%- endif %}
+{%- if profile_item['disk']['wipe'] is defined %} --diskwipe --fswipe --partcreate{%- endif %}
 {%- endif %}
