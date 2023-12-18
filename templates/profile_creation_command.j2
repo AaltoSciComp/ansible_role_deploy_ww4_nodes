@@ -14,9 +14,9 @@ wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is def
 {%- if True                                    %} --diskname "{{ profile_item['disk']['dev'] }}"{%- endif %}
 {%- if True                                    %} --fsformat "{{ profile_item['disk']['format'] }}"{%- endif %}
 {%- if True                                    %} --fspath "{{ profile_item['disk']['path'] }}"{%- endif %}
-{%- if True                                    %} --partname "{{ profile_item['Id'] }}"{%- endif %}
+{%- if True                                    %} --partname "{{ profile_item['Id'] }} --partcreate"{%- endif %}
 {%- if True                                    %} --fsname "{{ profile_item['Id'] }}"{%- endif %}
 {%- if profile_item['disk']['size'] is defined %} --partsize="{{profile_item['disk']['size']}}"{%- endif %}
 {%- if profile_item['disk']['num'] is defined  %} --partnumber "{{ profile_item['disk']['num'] }}"{%- endif %}
-{%- if profile_item['disk']['wipe'] is defined %} --diskwipe --fswipe --partcreate{%- endif %}
+{%- if profile_item['disk']['wipe'] is defined %} --diskwipe --fswipe{%- endif %}
 {%- endif %}
