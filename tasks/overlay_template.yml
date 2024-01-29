@@ -18,6 +18,9 @@
     ansible.builtin.template:
       src: "{{ file_item['ansible_src_template'] }}"
       dest: "{{ tmpFolderOverlayFile.path }}"
+      owner: "{{ file_item['owner'] | default('root') }}"
+      group: "{{ file_item['group'] | default('root') }}"
+      mode: "{{ file_item['mode'] | default('400') }}"
 
   - name: Read Templated File Contents
     ansible.builtin.slurp:
