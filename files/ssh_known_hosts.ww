@@ -1,8 +1,8 @@
 {{- range $node := $.AllNodes}}
-{{$node.Id.Get}} {{ Include "/usr/local/etc/warewulf/keys/ssh_host_ed25519_key.pub" }}
+{{$node.Id.Get}} {{ Include "/etc/warewulf/keys/ssh_host_ed25519_key.pub" }}
 {{- range $devname, $netdev := $node.NetDevs}}
 {{- if $netdev.Ipaddr.Defined}}
-{{$netdev.Ipaddr.Get}} {{ Include "/usr/local/etc/warewulf/keys/ssh_host_ed25519_key.pub" }}
+{{$netdev.Ipaddr.Get}} {{ Include "/etc/warewulf/keys/ssh_host_ed25519_key.pub" }}
 {{- end}}
 {{- end}}
 {{- end}}
