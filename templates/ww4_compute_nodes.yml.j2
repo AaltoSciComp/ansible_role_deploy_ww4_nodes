@@ -25,5 +25,11 @@
     {{hostvars[item|quote].ext_netdev}}:
       ipaddr: {{hostvars[item|quote].ext_ip_addr}}
 {%endif%}
+{% if hostvars[item|quote].tags is defined %}
+  tags:
+{% for tag_item in hostvars[item|quote].tags.split(',') %}
+    {{ tag_item.split(':')[0] }}: {{ tag_item.split(':')[1] }}
+{%endfor%}
+{%endif%}
 
 {%endfor%}
