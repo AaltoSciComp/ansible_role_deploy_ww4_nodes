@@ -8,6 +8,13 @@
     loop_var: overlay_item
   tags: ['overlays']
 
+- name: copy over all ipxe profile related templates from files/ww4/profiles/ipxe/*.ipxe to /etc/warewulf/ipxe/
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/warewulf/ipxe/{{ item | basename }}"
+  with_fileglob:
+    - "files/ww4/profiles/ipxe/*.ipxe"
+
 - name: Add node profiles to warewulf4
   include_tasks: profiles.yml
   loop: "{{ ww4_profiles }}"
@@ -18,5 +25,4 @@
 - name: Add nodes to warewulf4
   include_tasks: nodes.yml
   tags: ['nodes']
-
 

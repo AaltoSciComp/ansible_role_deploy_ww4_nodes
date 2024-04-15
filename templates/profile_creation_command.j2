@@ -2,6 +2,7 @@ wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is def
 {%- if profile_item['KernelArgs']         is defined %} --kernelargs "{{profile_item['KernelArgs']}}"{%- endif %}
 {%- if profile_item['RuntimeOverlay']     is defined %} --runtime "{{profile_item['RuntimeOverlay']}}"{%- endif %}
 {%- if profile_item['Container']          is defined %} --container "{{profile_item['Container']}}"{%- endif %}
+{%- if profile_item['ipxe']               is defined %} --ipxe "{{profile_item['ipxe']}}"{%- endif %}
 {%- if profile_item['Network']            is defined %} --netmask "{{profile_item['Network']['NETMASK']}}"
 {%-   if profile_item['Network']['GATEWAY'] is defined %} --gateway "{{profile_item['Network']['GATEWAY']}}"{%- endif %}
 {%-   if profile_item['Network']['netname'] is defined %} --netname "{{profile_item['Network']['netname']}}"{%- endif %}
