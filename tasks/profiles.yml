@@ -8,8 +8,10 @@
 - name: Remove existing versions of the node profiles
   ansible.builtin.shell:
     cmd: "echo y |wwctl profile delete  {{profile_item['Id']}}"
+  register: command_output
   tags: notest
-  ignore_errors: true  #It is ok if the profile doesn't exist yet.
+  failed_when: command_output.rc not in [0, 1]
+  changed_when: command_output.rc == 0
 
 - name: Print the node profiles creating commands to console
   ansible.builtin.debug:
