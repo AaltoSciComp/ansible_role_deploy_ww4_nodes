@@ -18,11 +18,7 @@
     ansible.builtin.copy:
       src: "{{ file_item['ansible_src_file'] }}"
       dest: "{{ tmpFolderOverlayFile.path }}"
-
-
-
-
-
+      mode: "preserve"
 
   - name: Print the original file
     ansible.builtin.debug:
