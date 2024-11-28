@@ -24,7 +24,9 @@
 
 - name: Create directories
   ansible.builtin.shell:
-    cmd: "wwctl overlay mkdir {{ overlay_item['name'] }}  {{ item['name'] }}"
+    cmd: >
+      wwctl overlay mkdir {{ overlay_item['name'] }}  {{ item['name'] }}
+      {% if item['mode'] is defined %}--mode {{ item['mode'] }}{% endif %}
   loop: "{{overlay_item['dirs']}}"
   tags: notest
 
