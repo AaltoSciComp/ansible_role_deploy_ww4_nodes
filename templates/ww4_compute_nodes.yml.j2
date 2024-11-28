@@ -20,9 +20,14 @@
 {% if hostvars[item|quote].int_dev is defined %}
       device: {{hostvars[item|quote].int_dev}}
 {%endif%}
-{% if hostvars[item|quote].ib_ip_addr is defined %}
+{% if ( ( hostvars[item|quote].ib_ip_addr is defined ) or ( hostvars[item|quote].ib_dev is defined ) ) %}
     ib:
-      ipaddr: {{hostvars[item|quote].ib_ip_addr}}
+{%endif%}
+{% if hostvars[item|quote].ib_ip_addr is defined %}
+      ipaddr: {{ hostvars[item|quote].ib_ip_addr }}
+{%endif%}
+{% if hostvars[item|quote].ib_dev is defined %}
+      device: {{ hostvars[item|quote].ib_dev }}
 {%endif%}
 {% if hostvars[item|quote].ext_ip_addr is defined %}
     {{hostvars[item|quote].ext_netdev}}:
