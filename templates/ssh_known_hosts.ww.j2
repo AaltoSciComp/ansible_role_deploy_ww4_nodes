@@ -1,11 +1,8 @@
 {{ '{{- range $node := $.AllNodes}}' }}
-{{ '{{- $host := "" }}' }}
-{{ '{{- range $i,$a := (split $node.Id ".") }}' }}
-{{ '{{- if eq $i 0 }}{{ $host = $a }}{{ end }}' }}
-{{ '{{- end}}' }}
+{{ '{{- $host := split "." $node.Id }}' }}
 {% for item in ww4_sshkeys %}
 {{ '{{$node.Id}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
-{{ '{{$host}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
+{{ '{{$host._0}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
 {% endfor %}
 {{ '{{- range $devname, $netdev := $node.NetDevs}}' }}
 {{ '{{- if $netdev.Ipaddr.Defined}}' }}
