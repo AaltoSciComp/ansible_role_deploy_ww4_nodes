@@ -5,7 +5,7 @@
 {{ '{{$host._0}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
 {% endfor %}
 {{ '{{- range $devname, $netdev := $node.NetDevs}}' }}
-{{ '{{- if $netdev.Ipaddr.Defined}}' }}
+{{ '{{- if $netdev.Ipaddr}}' }}
 {% for item in ww4_sshkeys %}
 {{ '{{$netdev.Ipaddr}} {{ Include ' }}"{{ ww4_sshkeys_dir }}/{{ item }}.pub" {{ '}}' }}
 {% endfor %}
