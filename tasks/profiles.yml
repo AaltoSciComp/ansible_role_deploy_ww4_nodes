@@ -5,11 +5,18 @@
     msg: "echo y |wwctl profile delete  {{profile_item['Id']}}"
     verbosity: 1
 
+- name: Check if profile exists
+  ansible.builtin.shell:
+    cmd: "wwctl profile list {{profile_item['Id']}} | grep ^{{profile_item['Id']}}"
+  register: profile_check
+  ignore_errors: yes
+
 - name: Remove existing versions of the node profiles
   ansible.builtin.shell:
     cmd: "echo y |wwctl profile delete  {{profile_item['Id']}}"
   register: command_output
   tags: notest
+  when: profile_check.rc == 0
   failed_when: command_output.rc not in [0, 1]
   changed_when: command_output.rc == 0
 

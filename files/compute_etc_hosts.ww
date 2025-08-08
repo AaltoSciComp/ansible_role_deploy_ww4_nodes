@@ -10,16 +10,16 @@
 
 {{- range $node := $.AllNodes}}                  {{/* for each node */}}
 {{- $host := "" }}
-{{- range $i,$a := (split $node.Id.Get ".") }}
+{{- range $i,$a := (split $node.Id ".") }}
 {{- if eq $i 0 }}{{ $host = $a }}{{ end }}
 {{- end }}
-# Entry for {{$node.Id.Get}}
+# Entry for {{$node.Id}}
 {{- range $devname, $netdev := $node.NetDevs}} {{/* for each network device on the node */}}
 {{- if $netdev.Ipaddr.Defined}}                {{/* if we have an ip address on this network device */}}
 {{- /* emit the node name as hostname if this is the primary */}}
-{{$netdev.Ipaddr.Get}} {{$node.Id.Get}}-{{$devname}}
-{{- if $netdev.Device.Defined}} {{$node.Id.Get}}-{{$netdev.Device.Get}}{{end}}
-{{- if $netdev.Primary.GetB}} {{$node.Id.Get}} {{$host}}{{end}}
+{{$netdev.Ipaddr}} {{$node.Id}}-{{$devname}}
+{{- if $netdev.Device.Defined}} {{$node.Id}}-{{$netdev.Device}}{{end}}
+{{- if $netdev.Primary.GetB}} {{$node.Id}} {{$host}}{{end}}
 {{- end}} {{/* end if ip */}}
 {{- end}} {{/* end for each network device */}}
 {{- end}} {{/* end for each node */}}
