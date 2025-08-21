@@ -35,6 +35,10 @@
 {% if hostvars[item|quote].ext_ip_addr is defined %}
     {{hostvars[item|quote].ext_netdev}}:
       ipaddr: {{hostvars[item|quote].ext_ip_addr}}
+      device: {{hostvars[item|quote].ext_netdev}}
+{% if hostvars[item|quote].ext_ip_mac is defined %}
+      hwaddr: {{ hostvars[item|quote].ext_ip_mac }}
+{%endif%}
 {%endif%}
 {% if hostvars[item|quote].tags is defined %}
   tags:
