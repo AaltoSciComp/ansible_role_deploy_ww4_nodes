@@ -26,6 +26,9 @@
 {% if hostvars[item|quote].ib_ip_addr is defined %}
       ipaddr: {{ hostvars[item|quote].ib_ip_addr }}
 {%endif%}
+{% if hostvars[item|quote].ww4_node_ib_hwaddr is defined %}
+      hwaddr: {{ hostvars[item|quote].ww4_node_ib_hwaddr }}
+{%endif%}
 {% if hostvars[item|quote].ib_dev is defined %}
       device: {{ hostvars[item|quote].ib_dev }}
 {%endif%}
