@@ -1,5 +1,5 @@
 wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is defined %} --comment "{{profile_item['Comment']}}"{%- endif %}
-{%- if profile_item['KernelArgs']         is defined %} --kernelargs "{{profile_item['KernelArgs']}}"{%- endif %}
+{%- if profile_item['KernelArgs']         is defined %} --kernelargs '{{profile_item["KernelArgs"]}}'{%- endif %}
 {%- if profile_item['RuntimeOverlay']     is defined %} --runtime "{{profile_item['RuntimeOverlay']}}"{%- endif %}
 {%- if profile_item['SystemOverlay' ]     is defined %} --wwinit "{{profile_item['SystemOverlay']}}"{%- endif %}
 {%- if profile_item['Container']          is defined %} --container "{{profile_item['Container']}}"{%- endif %}
