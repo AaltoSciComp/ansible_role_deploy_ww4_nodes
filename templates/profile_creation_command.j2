@@ -22,3 +22,11 @@ wwctl profile add {{profile_item['Id']}}{%- if profile_item['Comment']    is def
 {%- if profile_item['disk']['num'] is defined  %} --partnumber "{{ profile_item['disk']['num'] }}"{%- endif %}
 {%- if profile_item['disk']['wipe'] is defined %} --diskwipe --fswipe{%- endif %}
 {%- endif %}
+{%- if profile_item['filesystem'] is defined %}{# This is intended to be used with pre-existing partitions, e.g. software raid  #}
+{%- if True                                          %} --fsname "{{     profile_item['filesystem']['dev']    }}"{%- endif %}
+{%- if True                                          %} --partname "UNSET"                                       {%- endif %}
+{%- if True                                          %} --diskname "{{   profile_item['filesystem']['dev']    }}"{%- endif %}
+{%- if True                                          %} --fsformat "{{   profile_item['filesystem']['format'] }}"{%- endif %}
+{%- if True                                          %} --fspath "{{     profile_item['filesystem']['path']   }}"{%- endif %}
+{%- if profile_item['filesystem']['wipe'] is defined %} --fswipe{%- endif %}
+{%- endif %}
